@@ -46,11 +46,20 @@ export default {
       const data = { id: Date.now(), ...newResource };
       console.log(data);
       this.storedResources.push(data);
+    },
+    removeResource(resId) {
+      const resIndex = this.storedResources.findIndex(res =>
+        res.id == resId
+      );
+      if (resIndex >= 0) {
+        this.storedResources.splice(resIndex, 1);
+      }
     }
   },
   provide() {
     return {
-      resources: this.storedResources
+      resources: this.storedResources,
+      removeResource: this.removeResource
     }
   }
 }
