@@ -1,17 +1,17 @@
 <template>
   <base-card>
-    <form action="">
+    <form @submit.prevent="submit">
       <div class="form-control">
         <label for="title">Title</label>
-        <input type="text" name="title" id="title">
+        <input ref="titleInput" type="text" name="title" id="title">
       </div>
       <div class="form-control">
         <label for="description">Description</label>
-        <textarea rows="3" name="description" id="description"></textarea>
+        <textarea ref="descriptionInput" rows="3" name="description" id="description"></textarea>
       </div>
       <div class="form-control">
         <label for="link">Link</label>
-        <input type="url" name="link" id="link">
+        <input ref="linkInput" type="url" name="link" id="link">
       </div>
       <div>
         <base-button type="submit">Add Resource</base-button>
@@ -20,6 +20,24 @@
     </form>
   </base-card>
 </template>
+<script>
+export default {
+  emits: ['add-resource'],
+  methods: {
+    submit() {
+      const enteredTitle = this.$refs.titleInput.value;
+      const enteredDescription = this.$refs.descriptionInput.value;
+      const enteredLink = this.$refs.linkInput.value;
+      this.$emit('add-resource', {
+        title: enteredTitle,
+        description: enteredDescription,
+        link: enteredLink
+      })
+      console.log("Submitted");
+    }
+  }
+}
+</script>
 <style scoped>
 label {
   font-weight: bold;
