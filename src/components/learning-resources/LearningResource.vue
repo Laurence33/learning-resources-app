@@ -1,19 +1,20 @@
 <template>
   <li>
-    <div>
+    <base-card>
       <header>
         <h3>{{ resource.title }}</h3>
         <button>Delete</button>
       </header>
-    </div>
-    <p>{{ resource.description }}</p>
-    <nav>
-      <a v-bind:href="resource.link">View Resource</a>
-    </nav>
+      <p>{{ resource.description }}</p>
+      <nav>
+        <a v-bind:href="resource.link">View Resource</a>
+      </nav>
+    </base-card>
   </li>
 </template>
 
 <script>
+
 export default {
   props: ['resource'],
   data() {
